@@ -3,6 +3,7 @@ package com.dtb.estudosjpa.model.repositories;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import org.apache.commons.logging.Log;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.dtb.estudosjpa.model.entities.Amizade;
 import com.dtb.estudosjpa.model.entities.Endereco;
 import com.dtb.estudosjpa.model.entities.Pessoa;
 
@@ -46,5 +48,14 @@ public class PessoaRepositoryTest {
 		//OSIV precisa ser estudado a fundo.
 		Optional<Pessoa> pessoa = repository.findById(Long.valueOf(1));
 		assertTrue(pessoa.isPresent());
+	}
+	@Test
+	public void testSaveAmigos() {
+		log.info("Testando OneToMany.");
+		pessoa.setAmizades(new ArrayList<>());
+		pessoa.setEndereco(endereco);
+		pessoa.getAmizades().add(new Amizade(pessoa, pessoa));
+		repository.save(pessoa);
+		assertNotNull(pessoa.getAmizades().get(0).getId());
 	}
 }
