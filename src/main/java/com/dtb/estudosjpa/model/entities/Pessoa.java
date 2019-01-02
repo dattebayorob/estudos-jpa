@@ -1,5 +1,6 @@
 package com.dtb.estudosjpa.model.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -47,6 +48,8 @@ public class Pessoa {
 	}
 
 	public List<Amizade> getAmizades() {
+		if(amizades == null)
+			amizades = new ArrayList<>();
 		return amizades;
 	}
 
