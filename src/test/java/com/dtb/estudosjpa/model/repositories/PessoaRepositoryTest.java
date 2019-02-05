@@ -24,23 +24,17 @@ public class PessoaRepositoryTest {
 	private PessoaRepository repository;
 	private static final Log log = LogFactory.getLog(PessoaRepositoryTest.class);
 	
-	private static boolean beforeInit = false;
 	private Pessoa pessoa;
 	private Pessoa amigo;
 	@Before
 	public void init() {
 		log.info("Inicializando entidades de teste ( Já que o testSave já está ok )");
-		if(!beforeInit) {
-			pessoa = new Pessoa();
-			pessoa.setEndereco(new Endereco("Rua de Testes", "1 T", "Bairro de Testes"));
-			amigo = new Pessoa();
-			amigo.setEndereco(new Endereco("Rua do amigo", "1", "Bairro do amigo"));
-			repository.save(pessoa);
-			repository.save(amigo);
-			beforeInit = true;
-		}else {
-			log.info("Entidades de teste já inicializadas.");
-		}
+		pessoa = new Pessoa();
+		pessoa.setEndereco(new Endereco("Rua de Testes", "1 T", "Bairro de Testes"));
+		amigo = new Pessoa();
+		amigo.setEndereco(new Endereco("Rua do amigo", "1", "Bairro do amigo"));
+		repository.save(pessoa);
+		repository.save(amigo);
 	}
 	
 	@Test
