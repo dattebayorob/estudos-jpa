@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.dtb.estudosjpa.model.entities.Amizade;
 import com.dtb.estudosjpa.model.entities.Endereco;
 import com.dtb.estudosjpa.model.entities.Pessoa;
 
@@ -23,8 +22,6 @@ import com.dtb.estudosjpa.model.entities.Pessoa;
 public class PessoaRepositoryTest {
 	@Autowired
 	private PessoaRepository repository;
-	@Autowired
-	private AmizadeRepository amizadeRepository;
 	private static final Log log = LogFactory.getLog(PessoaRepositoryTest.class);
 	
 	private static boolean beforeInit = false;
@@ -63,13 +60,5 @@ public class PessoaRepositoryTest {
 		//OSIV precisa ser estudado a fundo.
 		Optional<Pessoa> pessoa = repository.findById(Long.valueOf(1));
 		assertTrue(pessoa.isPresent());
-	}
-	@Test
-	public void testSaveAmigos() {
-		log.info("Testando OneToMany.");
-		pessoa.getAmizades().add(amizadeRepository.save(new Amizade(pessoa, amigo)));
-		repository.save(pessoa);
-		pessoa.getAmizades().forEach(amizade -> System.out.println(amizade.getId()));
-		assertNotNull(pessoa.getAmizades().get(0).getId());
 	}
 }
